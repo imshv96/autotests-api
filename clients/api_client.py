@@ -10,7 +10,7 @@ class APIClient:
 
         :param client: экземпляр httpx.Client для выполнения HTTP-запросов
         """
-        self.client = Client
+        self.client = client
 
     def get(self, url: URL | str, params: QueryParams | None = None) -> Response:
         """
@@ -20,7 +20,7 @@ class APIClient:
         :param params: GET-параметры запроса (например, ?key=value).
         :return: Объект Response с данными ответа.
         """
-        return self.get(url, params=params)
+        return self.client.get(url, params=params)
 
     def post(self, url: URL | str, json: Any | None = None, data: RequestData | None = None,
              files: RequestFiles | None = None) -> Response:
@@ -33,7 +33,7 @@ class APIClient:
         :param files: Файлы для загрузки на сервер.
         :return: Объект Response с данными ответа.
         """
-        return self.post(url, json=json, data=data, files=files)
+        return self.client.post(url, json=json, data=data, files=files)
 
     def patch(self, url: URL | str, json: Any | None = None) -> Response:
         """
